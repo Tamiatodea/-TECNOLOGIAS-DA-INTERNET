@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <title>Esqueleto de um Formulário</title>
+    <script>
+    function contarCaracteres() {
+      var inputText = document.getElementById("inputText");
+      var quantidadeCaracteres = inputText.value.length;
+      alert("Quantidade de caracteres digitados: " + quantidadeCaracteres);
+    }
+
+    function contarPalavras() {
+      var inputTextarea = document.getElementById("inputTextarea");
+      var palavras = inputTextarea.value.split(" ");
+      var quantidadePalavras = palavras.length;
+      alert("Quantidade de palavras: " + quantidadePalavras);
+    }
+
+    function verificarLimiteCaracteres() {
+      var inputTextarea = document.getElementById("inputTextarea");
+      var texto = inputTextarea.value;
+      if (texto.length > 144) {
+        alert("O texto não pode ter mais que 144 caracteres!");
+        inputTextarea.value = texto.substr(0, 144);
+      }
+    }
+    function exibirOpcoesSelecionadas() {
+      var select = document.getElementById("select");
+      var multiSelect = document.getElementById("multiSelect");
+      var radioButtons = document.getElementsByName("radio");
+      var checkboxes = document.getElementsByName("checkbox");
+
+      var opcoesSelecionadas = "";
+
+      opcoesSelecionadas += "Opção selecionada no Select: " + select.value + "\n";
+
+      opcoesSelecionadas += "Opções selecionadas no Multi Select:\n";
+      for (var i = 0; i < multiSelect.options.length; i++) {
+        if (multiSelect.options[i].selected) {
+          opcoesSelecionadas += "- " + multiSelect.options[i].text + "\n";
+        }
+      }
+
+      opcoesSelecionadas += "Opção selecionada no Radio Button: ";
+      for (var i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+          opcoesSelecionadas += radioButtons[i].value + "\n";
+          break;
+        }
+      }
+
+      opcoesSelecionadas += "Opções marcadas no Checkbox:\n";
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          opcoesSelecionadas += "- " + checkboxes[i].value + "\n";
+        }
+      }
+
+      alert(opcoesSelecionadas);
+    }
+   </script>
+  </head>
+  <body>
+  <h1>Formulário - Escreva sua opinião sobre as empresas de hospedagens brasileiras de servidores</h1>
+  <form>
+    <label for="inputText">Escreva o seu nome aqui:</label>
+    <input type="text" id="inputText" oninput="contarCaracteres()"><br><br>
+    
+    <label for="inputTextarea">Escreva a sua opinião aqui:</label>
+    <textarea id="inputTextarea" oninput="contarPalavras()" onblur="verificarLimiteCaracteres()"></textarea><br><br>
+    <label for="select">Você acha que no futuro as coisas vao melhorar em relação as hospedagen brasileiras?:</label>
+    <select id="select">
+      <option value="sim">Sim</option>
+      <option value="nao">Não</option>
+      <option value="nao quero opinar">Não quero opinar</option>
+    </select><br><br>
+
+    <label for="multiSelect">Selecione uma hospedagem brasileira ou várias que você conheça:</label>
+    <select id="multiSelect" multiple>
+      <option value="lurahosting">lurahosting</option>
+      <option value="enxadahost">enxadahost</option>
+      <option value="stabilityhost">stabilityhost</option>
+      <option value="nao conheco nenhuma">Não conheço nenhuma</option>
+    </select><br><br>
+
+    <label>Sua nota para esse formulário prototipo:</label>
+    <input type="radio" name="radio" value="10">10
+    <input type="radio" name="radio" value="5">5
+    <input type="radio" name="radio" value="0">0<br><br>
+
+    <label>Sua experiencia com esse formulário foi boa ou ruim?:</label>
+    <input type="checkbox" name="checkbox" value="foi boa">Foi boa
+    <input type="checkbox" name="checkbox" value="foi ruim">Foi ruim
+    <input type="checkbox" name="checkbox" value="nao quero opinar">Não quero opinar<br><br>
+
+    <button type="button" onclick="exibirOpcoesSelecionadas()">Exibir Opções Selecionadas</button>
+  </form>
+ </body>
+</html>

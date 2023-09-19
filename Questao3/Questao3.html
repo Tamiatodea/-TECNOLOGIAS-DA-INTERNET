@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora</title>
+    <style>
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+    input[type="text"] {
+      width: 200px;
+    }
+    input[type="button"] {
+      width: 60px;
+    }
+    </style>
+    <script>
+    var expressao = "";
+    var historico = [];
+
+    function adicionarNumero(numero) {
+      expressao += numero;
+      document.getElementById("expressao").value = expressao;
+    }
+
+    function calcular() {
+      var resultado = eval(expressao);
+      document.getElementById("resultado").value = resultado;
+      historico.push(expressao + " = " + resultado);
+      expressao = "";
+      document.getElementById("expressao").value = "";
+    }
+
+    function mostrarHistorico() {
+      var historicoTexto = "Histórico:\n";
+      for (var i = 0; i < historico.length; i++) {
+        historicoTexto += historico[i] + "\n";
+      }
+      alert(historicoTexto);
+    }
+    </script>
+  </head>
+  <body>
+    <h1>Calculadora</h1>
+    <table>
+    <tr>
+      <td colspan="3"><input type="text" id="expressao" readonly></td>
+      <td><input type="button" value="=" onclick="calcular()"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="7" onclick="adicionarNumero(7)"></td>
+      <td><input type="button" value="8" onclick="adicionarNumero(8)"></td>
+      <td><input type="button" value="9" onclick="adicionarNumero(9)"></td>
+      <td><input type="button" value="+" onclick="adicionarNumero('+')"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="4" onclick="adicionarNumero(4)"></td>
+      <td><input type="button" value="5" onclick="adicionarNumero(5)"></td>
+      <td><input type="button" value="6" onclick="adicionarNumero(6)"></td>
+      <td><input type="button" value="-" onclick="adicionarNumero('-')"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="1" onclick="adicionarNumero(1)"></td>
+      <td><input type="button" value="2" onclick="adicionarNumero(2)"></td>
+      <td><input type="button" value="3" onclick="adicionarNumero(3)"></td>
+      <td><input type="button" value="*" onclick="adicionarNumero('*')"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="0" onclick="adicionarNumero(0)"></td>
+      <td><input type="button" value="." onclick="adicionarNumero('.')"></td>
+      <td><input type="button" value="C" onclick="expressao = ''; document.getElementById('expressao').value = '';"></td>
+      <td><input type="button" value="/" onclick="adicionarNumero('/')"></td>
+    </tr>
+    </table>
+  <br>
+  Resultado: <input type="text" id="resultado" readonly>
+  <br><br>
+  <input type="button" value="Mostrar Histórico" onclick="mostrarHistorico()">
+  </body>
+</html>
